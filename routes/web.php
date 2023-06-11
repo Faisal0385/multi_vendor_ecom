@@ -35,6 +35,7 @@ require __DIR__.'/auth.php';
 
 ## Admin
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
+
 Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashobard');
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
