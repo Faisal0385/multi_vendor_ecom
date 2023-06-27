@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\UserController;
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+
+
+
+
 ## Admin
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
@@ -52,6 +57,26 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
 });
 
+## Admin Brand
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Brand All Route 
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/all/brand', 'AllBrand')->name('all.brand');
+        Route::get('/add/brand' , 'AddBrand')->name('add.brand');
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 ## Vendor
 Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
 
@@ -64,3 +89,5 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::post('/vendor/profile/store', [VendorController::class, 'VendorProfileStore'])->name('vendor.profile.store');
     Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
 });
+
+
