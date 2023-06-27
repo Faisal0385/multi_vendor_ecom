@@ -42,8 +42,9 @@
                                             aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="page-login.html"><i
-                                                class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" href="{{ route('user.logout') }}">
+                                            <i class="fi-rs-sign-out mr-10"></i>Logout
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -234,8 +235,8 @@
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>User Photo <span class="required">*</span></label>
-                                                        <input class="form-control" name="photo" type="file" onchange="showPreview(event)"
-                                                            id="image" />
+                                                        <input class="form-control" name="photo" type="file"
+                                                            onchange="showPreview(event)" id="image" />
                                                     </div>
 
                                                     <div class="form-group col-md-12">
@@ -264,22 +265,18 @@
             </div>
         </div>
     </div>
-
-    
 @endsection
 
 @section('script')
-
-    <script>  
+    <script>
         function showPreview(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
                 var preview = document.getElementById("file-ip-1-preview");
-                
+
                 preview.src = src;
                 preview.style.display = "block";
             }
         }
     </script>
-
 @endsection
