@@ -54,8 +54,15 @@
                                     aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="mb-0">Hello {{ Auth::user()->name }}</h3>
+                                            <h3 class="mb-0">Hello {{ Auth::user()->username }}</h3>
                                         </div>
+
+                                        <br>
+                                        <img id="showImage"
+                                            src="{{ !empty($userData->photo) ? url('upload/user_images/' . $userData->photo) : url('upload/no_image.jpg') }}"
+                                            alt="User" class="rounded-circle p-1 bg-primary" width="110">
+
+
                                         <div class="card-body">
                                             <p>
                                                 From your account dashboard. you can easily check &amp; view your <a
@@ -196,45 +203,46 @@
 
 
 
-                                            <form method="post" name="enq">
+                                            <form method="post" action="{{ route('user.profile.store') }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
                                                         <label>User Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="username"
+                                                        <input required class="form-control" name="username"
                                                             type="text" value="{{ $userData->username }}" />
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Full Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="name"
+                                                        <input required class="form-control" name="name"
                                                             value="{{ $userData->name }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Email <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="email"
+                                                        <input required class="form-control" name="email"
                                                             type="text" value="{{ $userData->email }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Phone <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="phone"
+                                                        <input required class="form-control" name="phone"
                                                             type="text" value="{{ $userData->phone }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Address <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="address"
+                                                        <input required class="form-control" name="address"
                                                             type="text" value="{{ $userData->address }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>User Photo <span class="required">*</span></label>
-                                                        <input class="form-control" name="photo" type="file"
+                                                        <input class="form-control" name="photo" type="file" onchange="showPreview(event)"
                                                             id="image" />
                                                     </div>
 
                                                     <div class="form-group col-md-12">
                                                         <label> <span class="required">*</span></label>
-                                                        <img id="showImage"
+                                                        <img id="file-ip-1-preview"
                                                             src="{{ !empty($userData->photo) ? url('upload/user_images/' . $userData->photo) : url('upload/no_image.jpg') }}"
-                                                            alt="User" class="rounded-circle p-1 bg-primary"
-                                                            width="110">
+                                                            alt="User" class="rounded p-1 bg-primary" width="110">
                                                     </div>
 
 
@@ -256,18 +264,22 @@
             </div>
         </div>
     </div>
+
+    
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
-        });
+
+    <script>  
+        function showPreview(event) {
+            if (event.target.files.length > 0) {
+                var src = URL.createObjectURL(event.target.files[0]);
+                var preview = document.getElementById("file-ip-1-preview");
+                
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
     </script>
+
 @endsection
