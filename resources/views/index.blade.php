@@ -180,6 +180,12 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
+
+
                                 <div class="tab-pane fade" id="account-detail" role="tabpanel"
                                     aria-labelledby="account-detail-tab">
                                     <div class="card">
@@ -187,43 +193,52 @@
                                             <h5>Account Details</h5>
                                         </div>
                                         <div class="card-body">
-                                            <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
+
+
+
                                             <form method="post" name="enq">
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
-                                                        <label>First Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="name"
-                                                            type="text" />
+                                                        <label>User Name <span class="required">*</span></label>
+                                                        <input required="" class="form-control" name="username"
+                                                            type="text" value="{{ $userData->username }}" />
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label>Last Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="phone" />
+                                                        <label>Full Name <span class="required">*</span></label>
+                                                        <input required="" class="form-control" name="name"
+                                                            value="{{ $userData->name }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>Display Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="dname"
-                                                            type="text" />
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label>Email Address <span class="required">*</span></label>
+                                                        <label>Email <span class="required">*</span></label>
                                                         <input required="" class="form-control" name="email"
-                                                            type="email" />
+                                                            type="text" value="{{ $userData->email }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>Current Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="password"
-                                                            type="password" />
+                                                        <label>Phone <span class="required">*</span></label>
+                                                        <input required="" class="form-control" name="phone"
+                                                            type="text" value="{{ $userData->phone }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>New Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="npassword"
-                                                            type="password" />
+                                                        <label>Address <span class="required">*</span></label>
+                                                        <input required="" class="form-control" name="address"
+                                                            type="text" value="{{ $userData->address }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label>Confirm Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="cpassword"
-                                                            type="password" />
+                                                        <label>User Photo <span class="required">*</span></label>
+                                                        <input class="form-control" name="photo" type="file"
+                                                            id="image" />
                                                     </div>
+
+                                                    <div class="form-group col-md-12">
+                                                        <label> <span class="required">*</span></label>
+                                                        <img id="showImage"
+                                                            src="{{ !empty($userData->photo) ? url('upload/user_images/' . $userData->photo) : url('upload/no_image.jpg') }}"
+                                                            alt="User" class="rounded-circle p-1 bg-primary"
+                                                            width="110">
+                                                    </div>
+
+
+
                                                     <div class="col-md-12">
                                                         <button type="submit"
                                                             class="btn btn-fill-out submit font-weight-bold"
@@ -241,4 +256,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 @endsection
