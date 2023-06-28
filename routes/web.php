@@ -57,12 +57,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
 });
 
-## Admin Brand
+## Admin Brand Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    // Brand All Route 
     Route::controller(BrandController::class)->group(function () {
         Route::get('/all/brand', 'AllBrand')->name('all.brand');
-        Route::get('/add/brand' , 'AddBrand')->name('add.brand');
+        Route::get('/add/brand', 'AddBrand')->name('add.brand');
+        Route::get('/edit/brand/{id}', 'EditBrand')->name('edit.brand');
+        Route::get('/delete/brand/{id}' , 'DeleteBrand')->name('delete.brand');
+
+        Route::post('/update/brand', 'UpdateBrand')->name('update.brand');
+        Route::post('/store/brand', 'StoreBrand')->name('store.brand');
     });
 });
 
@@ -89,5 +93,3 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::post('/vendor/profile/store', [VendorController::class, 'VendorProfileStore'])->name('vendor.profile.store');
     Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
 });
-
-

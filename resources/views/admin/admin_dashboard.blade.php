@@ -26,8 +26,7 @@
     <!-- Toastr Css-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <!-- DataTable -->
-    <link href="{{ asset('admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}"
-        rel="stylesheet" />
+    <link href="{{ asset('admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <!-- DataTable-->
     <title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
@@ -81,9 +80,15 @@
         });
     </script>
     <!--Datatable-->
+    {{-- validate --}}
+    <script src="{{ asset('admin/assets/js/validate.min.js') }}"></script>
     <!-- Toastr Js-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('admin/assets/js/code.js') }}"></script>
+   
+   <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
             switch (type) {
@@ -115,6 +120,7 @@
     <script src="{{ asset('admin/assets/js/index.js') }}"></script>
     <!--app JS-->
     <script src="{{ asset('admin/assets/js/app.js') }}"></script>
+
 
 
 </body>

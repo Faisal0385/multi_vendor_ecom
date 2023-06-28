@@ -34,8 +34,8 @@
                         <thead>
                             <tr>
                                 <th>Sl</th>
-                                <th>Brand Name</th>
                                 <th>Brand Image</th>
+                                <th>Brand Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,13 +43,15 @@
                             @foreach ($brands as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <img class="img-thumbnail" src="{{ asset($item->brand_image) }}"
+                                            style="width: 70px; height:70px;">
+                                    </td>
                                     <td>{{ $item->brand_name }}</td>
                                     <td>
-                                        <img src="{{ asset($item->brand_image) }}" style="width: 70px; height:40px;">
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-info">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('edit.brand', $item->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                        <a href="{{ route('delete.brand', $item->id) }}" class="btn btn-sm btn-danger"
+                                            id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -57,8 +59,8 @@
                         <tfoot>
                             <tr>
                                 <th>Sl</th>
-                                <th>Brand Name </th>
-                                <th>Brand Image </th>
+                                <th>Brand Image</th>
+                                <th>Brand Name</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
