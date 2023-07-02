@@ -49,6 +49,7 @@ require __DIR__ . '/auth.php';
 ## Admin
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
+
 ## Admin Profile Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashobard');
@@ -87,14 +88,14 @@ Route::controller(CategoryController::class)->group(function () {
 ## SubCategory All Route 
 Route::controller(SubCategoryController::class)->group(function () {
     Route::get('/all/subcategory', 'AllSubCategory')->name('all.subcategory');
-    
-   
+
+
     Route::get('/edit/subcategory/{id}', 'EditSubcategory')->name('edit.subcategory');
     Route::post('/update/subcategory', 'UpdateSubcategory')->name('update.subcategory');
     Route::get('/delete/subcategory/{id}', 'DeleteSubcategory')->name('delete.subcategory');
 
-    Route::get('/add/subcategory' , 'AddSubCategory')->name('add.subcategory');
-    Route::post('/store/subcategory' , 'StoreSubCategory')->name('store.subcategory');
+    Route::get('/add/subcategory', 'AddSubCategory')->name('add.subcategory');
+    Route::post('/store/subcategory', 'StoreSubCategory')->name('store.subcategory');
 });
 
 
@@ -110,6 +111,19 @@ Route::controller(SubCategoryController::class)->group(function () {
 
 ## Vendor
 Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
+Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
+Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
+
+## Vendor Active and Inactive All Route 
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/inactive/vendor', 'InactiveVendor')->name('inactive.vendor');
+    Route::get('/active/vendor' , 'ActiveVendor')->name('active.vendor');
+    Route::get('/inactive/vendor/details/{id}' , 'InactiveVendorDetails')->name('inactive.vendor.details');
+    Route::get('/active/vendor/details/{id}' , 'ActiveVendorDetails')->name('active.vendor.details');
+    
+    Route::post('/active/vendor/approve' , 'ActiveVendorApprove')->name('active.vendor.approve');
+    Route::post('/inactive/vendor/approve' , 'InActiveVendorApprove')->name('inactive.vendor.approve');
+});
 
 Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashobard');
