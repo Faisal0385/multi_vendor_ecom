@@ -48,8 +48,8 @@ require __DIR__ . '/auth.php';
 
 
 ## Admin
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
 ## Admin Profile Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -97,6 +97,8 @@ Route::controller(SubCategoryController::class)->group(function () {
 
     Route::get('/add/subcategory', 'AddSubCategory')->name('add.subcategory');
     Route::post('/store/subcategory', 'StoreSubCategory')->name('store.subcategory');
+
+    Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
 });
 
 
@@ -141,4 +143,15 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('/all/product', 'AllProduct')->name('all.product');
     Route::get('/add/product', 'AddProduct')->name('add.product');
+    Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
+    Route::get('/product/active/{id}', 'ProductActive')->name('product.active');
+    Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
+    Route::get('/product/inactive/{id}', 'ProductInactive')->name('product.inactive');
+    Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('product.multiimg.delete');
+
+    Route::post('/store/product', 'StoreProduct')->name('store.product');
+    Route::post('/update/product', 'UpdateProduct')->name('update.product');
+    Route::post('/update/product/thambnail', 'UpdateProductThambnail')->name('update.product.thambnail');
+    Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('update.product.multiimage');
+    
 });
