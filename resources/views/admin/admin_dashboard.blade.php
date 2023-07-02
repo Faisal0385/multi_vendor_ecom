@@ -28,6 +28,9 @@
     <!-- DataTable -->
     <link href="{{ asset('admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <!-- DataTable-->
+
+    <link href="{{ asset('admin/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+
     <title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
@@ -72,6 +75,19 @@
     <script src="{{ asset('admin/assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/jquery-knob/excanvas.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
+
+    {{-- tagsinput --}}
+    <script src="{{ asset('admin/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+    {{-- tinymce --}}
+    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js'
+        referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+
     <!--Datatable-->
     <script src="{{ asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script>
@@ -84,11 +100,11 @@
     <script src="{{ asset('admin/assets/js/validate.min.js') }}"></script>
     <!-- Toastr Js-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('admin/assets/js/code.js') }}"></script>
-   
-   <script>
+
+    <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
             switch (type) {
