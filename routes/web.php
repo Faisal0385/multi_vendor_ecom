@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\UserController;
@@ -136,6 +137,23 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 
     Route::post('/vendor/profile/store', [VendorController::class, 'VendorProfileStore'])->name('vendor.profile.store');
     Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
+
+    // Vendor Add Product All Route 
+    Route::controller(VendorProductController::class)->group(function () {
+        Route::get('/vendor/all/product', 'VendorAllProduct')->name('vendor.all.product');
+        Route::get('/vendor/add/product', 'VendorAddProduct')->name('vendor.add.product');
+        Route::get('/vendor/subcategory/ajax/{category_id}', 'VendorGetSubCategory');
+        Route::get('/vendor/edit/product/{id}', 'VendorEditProduct')->name('vendor.edit.product');
+        Route::get('/vendor/product/multiimg/delete/{id}', 'VendorMultiimgDelete')->name('vendor.product.multiimg.delete');
+        Route::get('/vendor/product/inactive/{id}' , 'VendorProductInactive')->name('vendor.product.inactive');
+        Route::get('/vendor/product/active/{id}' , 'VendorProductActive')->name('vendor.product.active');
+        Route::get('/vendor/delete/product/{id}' , 'VendorProductDelete')->name('vendor.delete.product');
+
+        Route::post('/vendor/store/product', 'VendorStoreProduct')->name('vendor.store.product');
+        Route::post('/vendor/update/product', 'VendorUpdateProduct')->name('vendor.update.product');
+        Route::post('/vendor/update/product/thambnail', 'VendorUpdateProductThabnail')->name('vendor.update.product.thambnail');
+        Route::post('/vendor/update/product/multiimage', 'VendorUpdateProductmultiImage')->name('vendor.update.product.multiimage');
+    });
 });
 
 
@@ -145,7 +163,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/add/product', 'AddProduct')->name('add.product');
     Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
     Route::get('/product/active/{id}', 'ProductActive')->name('product.active');
-    Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
+    Route::get('/delete/product/{id}', 'ProductDelete')->name('delete.product');
     Route::get('/product/inactive/{id}', 'ProductInactive')->name('product.inactive');
     Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('product.multiimg.delete');
 
@@ -153,5 +171,4 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/update/product', 'UpdateProduct')->name('update.product');
     Route::post('/update/product/thambnail', 'UpdateProductThambnail')->name('update.product.thambnail');
     Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('update.product.multiimage');
-    
 });

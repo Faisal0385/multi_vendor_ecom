@@ -28,21 +28,19 @@
         @if ($status === 'active')
             <li>
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
-                    </div>
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
                     <div class="menu-title">Product Manage </div>
                 </a>
                 <ul>
                     <li>
-                        <a href="index.html">
-                            <i class="bx bx-right-arrow-alt"></i>
-                            All Product
+                        <a href="{{ route('vendor.all.product') }}">
+                            <i class="bx bx-right-arrow-alt"></i>All Product
+                        </a>
+                    <li>
+                        <a href="{{ route('vendor.add.product') }}">
+                            <i class="bx bx-right-arrow-alt"></i>Add Product
                         </a>
                     </li>
-                    <li>
-                        <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
-                    </li>
-
                 </ul>
             </li>
             <li>
