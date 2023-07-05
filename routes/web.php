@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\UserController;
@@ -103,6 +104,12 @@ Route::controller(SubCategoryController::class)->group(function () {
 
     Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
 });
+
+
+
+
+## Frontend Product Details All Route 
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
 
 
 
